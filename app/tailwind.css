@@ -1,0 +1,24 @@
+@layer theme, base, components, utilities;
+@import "tailwindcss/theme.css" layer(theme);
+@import "tailwindcss/preflight.css" layer(base);
+@import "tailwindcss/utilities.css" layer(utilities);
+
+@keyframes ripple-border {
+  from {
+    opacity: 0.8;
+    transform: scale(1);
+  }
+  to {
+    opacity: 0;
+    transform: scale(2.5);
+  }
+}
+
+.ripple-border {
+  position: absolute;
+  border-radius: 9999px; /* 讓光圈圓形 */
+  border: 2px solid rgba(0, 0, 0, 0.2); /* 默認黑色邊框，可根據主題變更 */
+  transform: scale(0);
+  animation: ripple-border 0.5s ease-out;
+  pointer-events: none;
+}
