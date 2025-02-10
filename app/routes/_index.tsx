@@ -1,3 +1,4 @@
+import { SearchOutlined } from "../components/Icons";
 import AntdButton from "../components/AntdButton";
 import Button from "../components/Button";
 
@@ -10,7 +11,13 @@ export default function Index() {
         <Button variant="dashed">Dashed</Button>
         <Button variant="filled">Filled</Button>
         <Button variant="text">Text</Button>
-        <Button variant="link">Link</Button>
+        <Button
+          variant="link"
+          href="https://tailwindcss.com/docs/installation/using-vite"
+        >
+          <SearchOutlined />
+          Link
+        </Button>
         <Button disabled variant="solid">
           Disabled
         </Button>
@@ -19,23 +26,37 @@ export default function Index() {
         </Button>
       </div>
       <div className="flex flex-row flex-wrap gap-4">
-        <Button shape="circle" size="icon" variant="solid">
-          A
+        <Button
+          className="bg-gray-500"
+          shape="circle"
+          size="icon"
+          variant="solid"
+        >
+          <SearchOutlined />
         </Button>
         <Button shape="circle" size="icon" variant="outlined">
-          A
+          <SearchOutlined />
         </Button>
         <Button shape="circle" size="icon" variant="dashed">
-          A
+          <SearchOutlined />
         </Button>
         <Button shape="circle" size="icon" variant="filled">
-          A
+          <SearchOutlined />
         </Button>
         <Button shape="circle" size="icon" variant="text">
-          A
+          <SearchOutlined />
         </Button>
-        <Button shape="circle" size="icon" variant="link">
-          A
+        <Button
+          shape="circle"
+          size="icon"
+          variant="link"
+          href="https://tailwindcss.com/docs/installation/using-vite"
+          target="_blank"
+        >
+          <SearchOutlined />
+        </Button>
+        <Button shape="square" size="icon" loading variant="outlined">
+          <SearchOutlined />
         </Button>
       </div>
       <div className="flex flex-row flex-wrap gap-4">
@@ -54,10 +75,10 @@ export default function Index() {
         <Button size="large" variant="solid">
           Solid
         </Button>
-        <AntdButton>Click</AntdButton>
+        {/* <AntdButton>Click</AntdButton>
         <button className="bg-indigo-600 hover:not-focus:bg-indigo-700">
           Click Me
-        </button>
+        </button> */}
       </div>
     </div>
   );

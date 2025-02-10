@@ -1,11 +1,22 @@
+import React from "react";
 import { cn } from "../../utils/cn";
 import { cva, type VariantProps } from "class-variance-authority";
+import { Spin } from "../Icons";
 
-export interface ButtonProps
-  extends React.ButtonHTMLAttributes<HTMLButtonElement>,
-    VariantProps<typeof buttonVariants> {
-  loading?: boolean;
-}
+type ButtonBaseProps = React.ButtonHTMLAttributes<HTMLButtonElement> &
+  VariantProps<typeof buttonVariants> & {
+    loading?: boolean;
+  };
+
+type ButtonProps =
+  | (ButtonBaseProps & {
+      href?: never;
+      target?: never;
+    })
+  | (React.AnchorHTMLAttributes<HTMLAnchorElement> &
+      ButtonBaseProps & {
+        type?: never;
+      });
 
 const buttonVariants = cva(
   "ring-offset-background inline-flex cursor-pointer items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium disabled:pointer-events-none disabled:opacity-50",
@@ -39,6 +50,9 @@ const buttonVariants = cva(
 );
 
 const Button = ({
+  href,
+  target,
+  onClick,
   disabled = false,
   loading = false,
   children,
@@ -47,37 +61,33 @@ const Button = ({
   shape,
   className,
   ...props
-}: ButtonProps) => (
-  <button
-    className={cn(buttonVariants({ variant, size, shape }), className)}
-    disabled={disabled || loading}
-    type="button"
-    {...props}
-  >
-    {loading ? (
-      <svg
-        className="mr-1 -ml-1 size-5 animate-spin text-white"
-        xmlns="http://www.w3.org/2000/svg"
-        fill="none"
-        viewBox="0 0 24 24"
+}: ButtonProps) => {
+  if (href) {
+    return (
+      <a
+        href={href}
+        target={target}
+        className={cn(buttonVariants({ variant, size, shape }), className)}
+        onClick={disabled ? (e) => e.preventDefault() : onClick}
+        aria-disabled={disabled}
       >
-        <circle
-          className="opacity-25"
-          cx="12"
-          cy="12"
-          r="10"
-          stroke="black"
-          stroke-width="4"
-        ></circle>
-        <path
-          className="opacity-75"
-          fill="black"
-          d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
-        ></path>
-      </svg>
-    ) : null}
-    {children}
-  </button>
-);
+        {loading ? <Spin /> : null}
+        {children}
+      </a>
+    );
+  }
+
+  return (
+    <button
+      className={cn(buttonVariants({ variant, size, shape }), className)}
+      disabled={disabled || loading}
+      type="button"
+      {...props}
+    >
+      {loading ? <Spin /> : null}
+      {loading && size === "icon" ? null : children}
+    </button>
+  );
+};
 
 export default Button;
