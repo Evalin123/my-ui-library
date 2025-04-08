@@ -14,7 +14,7 @@ const Spin = (props: SVGAttributes<SVGSVGElement>) => (
       cy="12"
       r="10"
       stroke="black"
-      stroke-width="4"
+      strokeWidth="4"
     ></circle>
     <path
       className="opacity-75"

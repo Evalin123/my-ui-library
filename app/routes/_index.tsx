@@ -1,5 +1,5 @@
 import { SearchOutlined } from "../components/Icons";
-import AntdButton from "../components/AntdButton";
+import Wave from "../components/Wave";
 import Button from "../components/Button";
 
 export default function Index() {
@@ -10,7 +10,9 @@ export default function Index() {
         <Button variant="outlined">Outlined</Button>
         <Button variant="dashed">Dashed</Button>
         <Button variant="filled">Filled</Button>
-        <Button variant="text">Text</Button>
+        <Button variant="text" type="submit">
+          Text
+        </Button>
         <Button
           variant="link"
           href="https://tailwindcss.com/docs/installation/using-vite"
@@ -75,10 +77,9 @@ export default function Index() {
         <Button size="large" variant="solid">
           Solid
         </Button>
-        {/* <AntdButton>Click</AntdButton>
-        <button className="bg-indigo-600 hover:not-focus:bg-indigo-700">
-          Click Me
-        </button> */}
+        <Wave>
+          <Button variant="outlined">Outlined</Button>
+        </Wave>
       </div>
     </div>
   );

@@ -24,7 +24,8 @@ const buttonVariants = cva(
     variants: {
       variant: {
         solid: "border-none bg-black text-white hover:bg-black/50",
-        outlined: "bg-inherit text-black border-black border hover:bg-black/30",
+        outlined:
+          "bg-color-midnight text-black border-black border hover:bg-black/30",
         dashed: "bg-inherit text-black border border-dashed hover:bg-black/30",
         filled: "border-none bg-black/25 text-black hover:bg-black/50",
         text: "bg-inherit text-black border-none hover:bg-black/30",
@@ -62,6 +63,20 @@ const Button = ({
   className,
   ...props
 }: ButtonProps) => {
+  if (loading) {
+    return (
+      <button
+        className={cn(buttonVariants({ variant, size, shape }), className)}
+        disabled
+        type="button"
+        {...props}
+      >
+        <Spin />
+        {size !== "icon" && children}
+      </button>
+    );
+  }
+
   if (href) {
     return (
       <a
@@ -71,7 +86,6 @@ const Button = ({
         onClick={disabled ? (e) => e.preventDefault() : onClick}
         aria-disabled={disabled}
       >
-        {loading ? <Spin /> : null}
         {children}
       </a>
     );
@@ -80,12 +94,11 @@ const Button = ({
   return (
     <button
       className={cn(buttonVariants({ variant, size, shape }), className)}
-      disabled={disabled || loading}
+      disabled={disabled}
       type="button"
       {...props}
     >
-      {loading ? <Spin /> : null}
-      {loading && size === "icon" ? null : children}
+      {children}
     </button>
   );
 };
