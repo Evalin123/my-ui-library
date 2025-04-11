@@ -3,7 +3,7 @@
 import path from "path";
 import fs from "fs";
 import { Command } from "commander";
-import { intro, outro, select, log } from "@clack/prompts";
+import { intro, outro, select, log, isCancel, cancel } from "@clack/prompts";
 import color from "picocolors";
 import { fileURLToPath } from "url";
 
@@ -19,8 +19,12 @@ program
   .description("Which component would you like to add?")
   .argument("[component]", "the component to add or a url to the component.")
   .action(async (value) => {
+    intro(color.inverse("my-ui CLI"));
+
     let comp = value as string;
     if (!comp) {
+      // check if the user passed a component name
+      // if not, show a prompt to select a component
       comp = (await select({
         message: "Which component do you want to add?",
         options: [
@@ -31,10 +35,16 @@ program
       })) as string;
 
       if (!comp) {
-        log.error("No component selected.");
+        log.error(color.red("No component selected."));
         process.exit(1);
       }
     }
+    if (isCancel(comp)) {
+      // check if the user cancelled the prompt
+      cancel("Operation cancelled");
+      return process.exit(0);
+    }
+
     const templatesDir = path.resolve(__dirname, "app/templates");
     const targetDir = path.resolve(process.cwd(), "components/ui");
 
@@ -43,7 +53,7 @@ program
     const targetPath = path.join(targetDir, fileName);
 
     if (!fs.existsSync(sourcePath)) {
-      log.error(`Component ${comp} not found.`);
+      log.error(color.red(`${comp} not found.`));
       process.exit(1);
     }
 
@@ -51,7 +61,7 @@ program
 
     fs.mkdirSync(targetDir, { recursive: true });
     fs.copyFileSync(sourcePath, targetPath);
-    log.success(`Added ${comp} to components/ui/`);
+    outro(`${color.green("Success!")} Installed ${comp} component.`);
   });
 
 program.parse();
