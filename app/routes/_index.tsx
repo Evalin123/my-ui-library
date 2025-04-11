@@ -1,5 +1,5 @@
 import { SearchOutlined } from "../templates/Icons";
-import Button from "../templates/betton";
+import Button from "../templates/button";
 
 export default function Index() {
   return (
