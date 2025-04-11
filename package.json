@@ -11,6 +11,9 @@
     "start": "remix-serve build/server/index.js",
     "typecheck": "tsc"
   },
+  "bin": {
+    "my-ui": "./cli.ts"
+  },
   "keywords": [],
   "author": "",
   "license": "ISC",
