@@ -1,6 +1,6 @@
 import { useState } from "react";
-import { RadioGroup } from "../components/Radio";
-import { SearchOutlined } from "../components/Icons";
+import { RadioGroup } from "../templates/Radio";
+import { SearchOutlined } from "../templates/Icons";
 
 export default function RadioDemo() {
   const [selectedValue, setSelectedValue] = useState(1);

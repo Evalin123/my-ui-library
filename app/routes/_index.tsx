@@ -1,6 +1,5 @@
-import { SearchOutlined } from "../components/Icons";
-import Wave from "../components/Wave";
-import Button from "../components/Button";
+import { SearchOutlined } from "../templates/Icons";
+import Button from "../templates/betton";
 
 export default function Index() {
   return (
@@ -77,9 +76,6 @@ export default function Index() {
         <Button size="large" variant="solid">
           Solid
         </Button>
-        <Wave>
-          <Button variant="outlined">Outlined</Button>
-        </Wave>
       </div>
     </div>
   );

@@ -1,7 +1,7 @@
 import React from "react";
-import { cn } from "../../utils/cn";
+import { cn } from "../utils/cn";
 import { cva, type VariantProps } from "class-variance-authority";
-import { Spin } from "../Icons";
+import { Spin } from "./Icons";
 
 type ButtonBaseProps = React.ButtonHTMLAttributes<HTMLButtonElement> &
   VariantProps<typeof buttonVariants> & {
