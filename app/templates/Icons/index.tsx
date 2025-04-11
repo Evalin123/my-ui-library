@@ -1,4 +1,4 @@
-import SearchOutlined from "./SearchOutlined";
-import Spin from "./Spin";
+import SearchOutlined from "./searchOutlined";
+import Spin from "./spin";
 
 export { SearchOutlined, Spin };

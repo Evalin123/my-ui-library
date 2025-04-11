@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { RadioGroup } from "../templates/Radio";
+import { RadioGroup } from "../templates/radio";
 import { SearchOutlined } from "../templates/Icons";
 
 export default function RadioDemo() {
