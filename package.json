@@ -1,6 +1,6 @@
 {
   "name": "pikto-ui",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "> A minimal & playful component library powered by Remix and Tailwind CSS.",
   "type": "module",
   "main": "index.js",
