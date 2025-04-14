@@ -12,7 +12,7 @@
     "typecheck": "tsc"
   },
   "bin": {
-    "pikto": "cli.ts"
+    "pikto-ui": "./cli.ts"
   },
   "keywords": [],
   "author": "Eva Lin",
