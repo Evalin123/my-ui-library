@@ -1,7 +1,7 @@
 {
-  "name": "my-ui-lib",
+  "name": "pikto-ui",
   "version": "1.0.0",
-  "description": "",
+  "description": "> A minimal & playful component library powered by Remix and Tailwind CSS.",
   "type": "module",
   "main": "index.js",
   "scripts": {
@@ -12,10 +12,10 @@
     "typecheck": "tsc"
   },
   "bin": {
-    "pikto": "./cli.ts"
+    "pikto": "cli.ts"
   },
   "keywords": [],
-  "author": "",
+  "author": "Eva Lin",
   "license": "ISC",
   "dependencies": {
     "@clack/prompts": "^0.10.1",
@@ -40,5 +40,13 @@
     "tailwindcss": "^4.0.3",
     "tsx": "^4.19.3",
     "vite": "^6.0.11"
-  }
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Evalin123/pikto-ui.git"
+  },
+  "bugs": {
+    "url": "https://github.com/Evalin123/pikto-ui/issues"
+  },
+  "homepage": "https://github.com/Evalin123/pikto-ui#readme"
 }
