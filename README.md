@@ -19,10 +19,13 @@ Pikto UI is a lightweight and elegant UI component library designed for develope
 ## 📦 Installation
 
 You can install components individually using the CLI:
-
 ```bash
 npx pikto-ui add button
 ```
+- Running `npx pikto-ui add` (without a component name) will launch an interactive CLI that lets you choose a component from a list.
+- If you provide a component name (e.g. button), the CLI will install it directly without prompting.
+
+
 
 ## 🚀 Usage
 
