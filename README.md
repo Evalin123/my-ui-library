@@ -34,7 +34,7 @@ export default function App() {
     </Button>
   );
 }
-```
+
 
 ## 📁 Project Structure (for CLI users)
 ```
@@ -43,4 +43,4 @@ your-app/
 │   └── components/
 │       └── button.tsx ← Installed by Pikto CLI
 └── ...
-```
+
