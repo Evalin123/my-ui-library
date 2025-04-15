@@ -4,6 +4,10 @@ import { createReadableStreamFromReadable } from "@remix-run/node";
 import { RemixServer, Meta, Links, Outlet, Scripts } from "@remix-run/react";
 import * as isbotModule from "isbot";
 import { renderToPipeableStream } from "react-dom/server";
+import { useState } from "react";
+import classNames from "classnames";
+import { twMerge } from "tailwind-merge";
+import { cva } from "class-variance-authority";
 const ABORT_DELAY = 5e3;
 function handleRequest(request, responseStatusCode, responseHeaders, remixContext, loadContext) {
   let prohibitOutOfOrderStreaming = isBotRequest(request.headers.get("user-agent")) || remixContext.isSpaMode;
@@ -115,6 +119,8 @@ const entryServer = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineP
   __proto__: null,
   default: handleRequest
 }, Symbol.toStringTag, { value: "Module" }));
+const styles = "/assets/tailwind-CAWyNvWD.css";
+const links = () => [{ rel: "stylesheet", href: styles }];
 function App() {
   return /* @__PURE__ */ jsxs("html", { children: [
     /* @__PURE__ */ jsxs("head", { children: [
@@ -123,7 +129,6 @@ function App() {
       /* @__PURE__ */ jsx(Links, {})
     ] }),
     /* @__PURE__ */ jsxs("body", { children: [
-      /* @__PURE__ */ jsx("h1", { children: "Hello world!" }),
       /* @__PURE__ */ jsx(Outlet, {}),
       /* @__PURE__ */ jsx(Scripts, {})
     ] })
@@ -131,9 +136,295 @@ function App() {
 }
 const route0 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
   __proto__: null,
-  default: App
+  default: App,
+  links
 }, Symbol.toStringTag, { value: "Module" }));
-const serverManifest = { "entry": { "module": "/assets/entry.client-Dq9FcESb.js", "imports": ["/assets/components-QsK45cZe.js"], "css": [] }, "routes": { "root": { "id": "root", "parentId": void 0, "path": "", "index": void 0, "caseSensitive": void 0, "hasAction": false, "hasLoader": false, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/root-9eGKGFCL.js", "imports": ["/assets/components-QsK45cZe.js"], "css": [] } }, "url": "/assets/manifest-b4d9b28a.js", "version": "b4d9b28a" };
+const Radio = ({
+  label,
+  checked,
+  disabled,
+  className,
+  ...props
+}) => {
+  return /* @__PURE__ */ jsxs(
+    "label",
+    {
+      className: classNames(
+        "inline-flex items-center space-x-2 cursor-pointer",
+        { "opacity-50 cursor-not-allowed": disabled },
+        className
+      ),
+      children: [
+        /* @__PURE__ */ jsx(
+          "input",
+          {
+            type: "radio",
+            className: "hidden",
+            checked,
+            disabled,
+            ...props
+          }
+        ),
+        /* @__PURE__ */ jsx(
+          "div",
+          {
+            className: classNames(
+              "w-5 h-5 border-1 rounded-full flex items-center justify-center",
+              {
+                "border-6 border-blue-500": checked,
+                "border-gray-300": !checked
+              }
+            )
+          }
+        ),
+        /* @__PURE__ */ jsx("span", { className: "text-sm text-gray-700", children: label })
+      ]
+    }
+  );
+};
+const RadioGroup = ({
+  options,
+  value,
+  onChange
+}) => {
+  return /* @__PURE__ */ jsx("div", { className: "flex space-x-4", children: options.map((option) => /* @__PURE__ */ jsx(
+    Radio,
+    {
+      label: option.label,
+      checked: value === option.value,
+      onChange: () => onChange(option.value),
+      disabled: option.disabled
+    },
+    option.value
+  )) });
+};
+const SearchOutlined = (props) => /* @__PURE__ */ jsx(
+  "svg",
+  {
+    xmlns: "http://www.w3.org/2000/svg",
+    x: "0px",
+    y: "0px",
+    height: "18",
+    viewBox: "0 0 50 50",
+    width: "18",
+    ...props,
+    children: /* @__PURE__ */ jsx(
+      "path",
+      {
+        className: "opacity-75",
+        fill: "black",
+        d: "M 21 3 C 11.621094 3 4 10.621094 4 20 C 4 29.378906 11.621094 37 21 37 C 24.710938 37 28.140625 35.804688 30.9375 33.78125 L 44.09375 46.90625 L 46.90625 44.09375 L 33.90625 31.0625 C 36.460938 28.085938 38 24.222656 38 20 C 38 10.621094 30.378906 3 21 3 Z M 21 5 C 29.296875 5 36 11.703125 36 20 C 36 28.296875 29.296875 35 21 35 C 12.703125 35 6 28.296875 6 20 C 6 11.703125 12.703125 5 21 5 Z"
+      }
+    )
+  }
+);
+const Spin = (props) => /* @__PURE__ */ jsxs(
+  "svg",
+  {
+    className: "size-5 animate-spin text-white",
+    xmlns: "http://www.w3.org/2000/svg",
+    fill: "none",
+    viewBox: "0 0 24 24",
+    ...props,
+    children: [
+      /* @__PURE__ */ jsx(
+        "circle",
+        {
+          className: "opacity-25",
+          cx: "12",
+          cy: "12",
+          r: "10",
+          stroke: "black",
+          strokeWidth: "4"
+        }
+      ),
+      /* @__PURE__ */ jsx(
+        "path",
+        {
+          className: "opacity-75",
+          fill: "black",
+          d: "M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
+        }
+      )
+    ]
+  }
+);
+function RadioDemo() {
+  const [selectedValue, setSelectedValue] = useState(1);
+  return /* @__PURE__ */ jsx("div", { children: /* @__PURE__ */ jsx("div", { className: "p-8 flex gap-4", children: /* @__PURE__ */ jsx(
+    RadioGroup,
+    {
+      value: selectedValue,
+      onChange: setSelectedValue,
+      options: [
+        {
+          value: 1,
+          label: /* @__PURE__ */ jsxs("div", { className: "gap-1 flex items-center", children: [
+            /* @__PURE__ */ jsx(SearchOutlined, { style: { fontSize: 18 } }),
+            "Search"
+          ] })
+        },
+        { value: 2, label: "Option 2" },
+        { value: 3, label: "Option 3", disabled: true }
+      ]
+    }
+  ) }) });
+}
+const route1 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
+  __proto__: null,
+  default: RadioDemo
+}, Symbol.toStringTag, { value: "Module" }));
+function cn(...inputs) {
+  return twMerge(classNames(inputs));
+}
+const buttonVariants = cva(
+  "ring-offset-background inline-flex cursor-pointer items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium disabled:pointer-events-none disabled:opacity-50",
+  {
+    variants: {
+      variant: {
+        solid: "border-none bg-black text-white hover:bg-black/50",
+        outlined: "bg-color-midnight text-black border-black border hover:bg-black/30",
+        dashed: "bg-inherit text-black border border-dashed hover:bg-black/30",
+        filled: "border-none bg-black/25 text-black hover:bg-black/50",
+        text: "bg-inherit text-black border-none hover:bg-black/30",
+        link: "bg-inherit border-none text-black hover:text-black/50"
+      },
+      size: {
+        small: "h-9 px-3 py-1 text-sm",
+        medium: "h-10 px-4 py-2 text-base",
+        large: "h-11 px-5 py-3 text-lg",
+        icon: "h-10 w-10"
+      },
+      shape: {
+        square: "rounded-md",
+        circle: "rounded-full"
+      }
+    },
+    defaultVariants: {
+      variant: "solid",
+      size: "medium",
+      shape: "square"
+    }
+  }
+);
+const Button = ({
+  href,
+  target,
+  onClick,
+  disabled = false,
+  loading = false,
+  children,
+  variant,
+  size,
+  shape,
+  className,
+  ...props
+}) => {
+  if (loading) {
+    return /* @__PURE__ */ jsxs(
+      "button",
+      {
+        className: cn(buttonVariants({ variant, size, shape }), className),
+        disabled: true,
+        type: "button",
+        ...props,
+        children: [
+          /* @__PURE__ */ jsx(Spin, {}),
+          size !== "icon" && children
+        ]
+      }
+    );
+  }
+  if (href) {
+    return /* @__PURE__ */ jsx(
+      "a",
+      {
+        href,
+        target,
+        className: cn(buttonVariants({ variant, size, shape }), className),
+        onClick: disabled ? (e) => e.preventDefault() : onClick,
+        "aria-disabled": disabled,
+        children
+      }
+    );
+  }
+  return /* @__PURE__ */ jsx(
+    "button",
+    {
+      className: cn(buttonVariants({ variant, size, shape }), className),
+      disabled,
+      type: "button",
+      ...props,
+      children
+    }
+  );
+};
+function Index() {
+  return /* @__PURE__ */ jsxs("div", { className: "p-8 flex flex-col gap-4", children: [
+    /* @__PURE__ */ jsxs("div", { className: "flex gap-4 flex-wrap", children: [
+      /* @__PURE__ */ jsx(Button, { variant: "solid", children: "Solid" }),
+      /* @__PURE__ */ jsx(Button, { variant: "outlined", children: "Outlined" }),
+      /* @__PURE__ */ jsx(Button, { variant: "dashed", children: "Dashed" }),
+      /* @__PURE__ */ jsx(Button, { variant: "filled", children: "Filled" }),
+      /* @__PURE__ */ jsx(Button, { variant: "text", type: "submit", children: "Text" }),
+      /* @__PURE__ */ jsxs(
+        Button,
+        {
+          variant: "link",
+          href: "https://tailwindcss.com/docs/installation/using-vite",
+          children: [
+            /* @__PURE__ */ jsx(SearchOutlined, {}),
+            "Link"
+          ]
+        }
+      ),
+      /* @__PURE__ */ jsx(Button, { disabled: true, variant: "solid", children: "Disabled" }),
+      /* @__PURE__ */ jsx(Button, { loading: true, variant: "outlined", children: "Loading" })
+    ] }),
+    /* @__PURE__ */ jsxs("div", { className: "flex flex-row flex-wrap gap-4", children: [
+      /* @__PURE__ */ jsx(
+        Button,
+        {
+          className: "bg-gray-500",
+          shape: "circle",
+          size: "icon",
+          variant: "solid",
+          children: /* @__PURE__ */ jsx(SearchOutlined, {})
+        }
+      ),
+      /* @__PURE__ */ jsx(Button, { shape: "circle", size: "icon", variant: "outlined", children: /* @__PURE__ */ jsx(SearchOutlined, {}) }),
+      /* @__PURE__ */ jsx(Button, { shape: "circle", size: "icon", variant: "dashed", children: /* @__PURE__ */ jsx(SearchOutlined, {}) }),
+      /* @__PURE__ */ jsx(Button, { shape: "circle", size: "icon", variant: "filled", children: /* @__PURE__ */ jsx(SearchOutlined, {}) }),
+      /* @__PURE__ */ jsx(Button, { shape: "circle", size: "icon", variant: "text", children: /* @__PURE__ */ jsx(SearchOutlined, {}) }),
+      /* @__PURE__ */ jsx(
+        Button,
+        {
+          shape: "circle",
+          size: "icon",
+          variant: "link",
+          href: "https://tailwindcss.com/docs/installation/using-vite",
+          target: "_blank",
+          children: /* @__PURE__ */ jsx(SearchOutlined, {})
+        }
+      ),
+      /* @__PURE__ */ jsx(Button, { shape: "square", size: "icon", loading: true, variant: "outlined", children: /* @__PURE__ */ jsx(SearchOutlined, {}) })
+    ] }),
+    /* @__PURE__ */ jsxs("div", { className: "flex flex-row flex-wrap gap-4", children: [
+      /* @__PURE__ */ jsx(Button, { className: "bg-red-600 hover:bg-indigo-700", variant: "solid", children: "Solid" }),
+      /* @__PURE__ */ jsx(Button, { variant: "dashed", children: "Search" })
+    ] }),
+    /* @__PURE__ */ jsxs("div", { className: "flex flex-row flex-wrap gap-4", children: [
+      /* @__PURE__ */ jsx(Button, { size: "small", variant: "solid", children: "Solid" }),
+      /* @__PURE__ */ jsx(Button, { size: "medium", variant: "solid", children: "Solid" }),
+      /* @__PURE__ */ jsx(Button, { size: "large", variant: "solid", children: "Solid" })
+    ] })
+  ] });
+}
+const route2 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
+  __proto__: null,
+  default: Index
+}, Symbol.toStringTag, { value: "Module" }));
+const serverManifest = { "entry": { "module": "/assets/entry.client-BqFK1pa3.js", "imports": ["/assets/jsx-runtime-CLUdW5VC.js", "/assets/index-C3SifoeI.js", "/assets/components-CP0FHthH.js"], "css": [] }, "routes": { "root": { "id": "root", "parentId": void 0, "path": "", "index": void 0, "caseSensitive": void 0, "hasAction": false, "hasLoader": false, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/root--nPv5Civ.js", "imports": ["/assets/jsx-runtime-CLUdW5VC.js", "/assets/index-C3SifoeI.js", "/assets/components-CP0FHthH.js"], "css": [] }, "routes/radio-demo": { "id": "routes/radio-demo", "parentId": "root", "path": "radio-demo", "index": void 0, "caseSensitive": void 0, "hasAction": false, "hasLoader": false, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/radio-demo-BTOPKfV4.js", "imports": ["/assets/jsx-runtime-CLUdW5VC.js", "/assets/index-C3SifoeI.js", "/assets/searchOutlined-lqpNnImW.js"], "css": [] }, "routes/_index": { "id": "routes/_index", "parentId": "root", "path": void 0, "index": true, "caseSensitive": void 0, "hasAction": false, "hasLoader": false, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/_index-CGY-4xM4.js", "imports": ["/assets/jsx-runtime-CLUdW5VC.js", "/assets/searchOutlined-lqpNnImW.js"], "css": [] } }, "url": "/assets/manifest-ed804d77.js", "version": "ed804d77" };
 const mode = "production";
 const assetsBuildDirectory = "build/client";
 const basename = "/";
@@ -149,6 +440,22 @@ const routes = {
     index: void 0,
     caseSensitive: void 0,
     module: route0
+  },
+  "routes/radio-demo": {
+    id: "routes/radio-demo",
+    parentId: "root",
+    path: "radio-demo",
+    index: void 0,
+    caseSensitive: void 0,
+    module: route1
+  },
+  "routes/_index": {
+    id: "routes/_index",
+    parentId: "root",
+    path: void 0,
+    index: true,
+    caseSensitive: void 0,
+    module: route2
   }
 };
 export {

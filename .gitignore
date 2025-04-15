@@ -11,3 +11,12 @@ package-lock.json
 
 # eslint cache
 .eslintcache
+
+# output
+/dist
+/build
+
+# OS / editor
+.DS_Store
+.idea
+.vscode

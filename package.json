@@ -5,14 +5,14 @@
   "type": "module",
   "main": "index.js",
   "scripts": {
-    "build": "remix vite:build",
+    "build": "remix vite:build && tsup",
     "dev": "remix vite:dev",
     "lint": "eslint --ignore-path .gitignore --cache --cache-location ./node_modules/.cache/eslint .",
     "start": "remix-serve build/server/index.js",
     "typecheck": "tsc"
   },
   "bin": {
-    "pikto-ui": "./cli.ts"
+    "pikto-ui": "./dist/cli.js"
   },
   "keywords": [],
   "author": "Eva Lin",
@@ -38,9 +38,15 @@
     "@remix-run/dev": "^2.15.3",
     "@types/react": "^19.0.8",
     "tailwindcss": "^4.0.3",
+    "tsup": "^8.4.0",
     "tsx": "^4.19.3",
+    "typescript": "^5.8.3",
     "vite": "^6.0.11"
   },
+  "files": [
+    "dist",
+    "app/templates"
+  ],
   "repository": {
     "type": "git",
     "url": "git+https://github.com/Evalin123/pikto-ui.git"

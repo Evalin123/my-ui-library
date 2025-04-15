@@ -45,8 +45,12 @@ program
       return process.exit(0);
     }
 
-    const templatesDir = path.resolve(__dirname, "app/templates");
-    const targetDir = path.resolve(process.cwd(), "components/ui");
+    const templatesDir = path.resolve(__dirname, "../app/templates");
+
+    const hasAppDir = fs.existsSync(path.resolve(process.cwd(), "app"));
+    const targetDir = hasAppDir
+      ? path.resolve(process.cwd(), "app/components/ui")
+      : path.resolve(process.cwd(), "components/ui");
 
     const fileName = `${comp}.tsx`;
     const sourcePath = path.join(templatesDir, fileName);
