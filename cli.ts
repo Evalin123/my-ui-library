@@ -41,7 +41,6 @@ program
         "tailwind-merge",
         "classnames",
         "tailwindcss",
-        "antd",
       ],
     };
     const deps = dependenciesMap[comp] || [];
