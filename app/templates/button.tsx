@@ -4,9 +4,7 @@ import { cva, type VariantProps } from "class-variance-authority";
 import { Spin } from "./Icons";
 
 type ButtonBaseProps = React.ButtonHTMLAttributes<HTMLButtonElement> &
-  VariantProps<typeof buttonVariants> & {
-    loading?: boolean;
-  };
+  VariantProps<typeof buttonVariants>;
 
 type ButtonProps =
   | (ButtonBaseProps & {
@@ -55,7 +53,6 @@ const Button = ({
   target,
   onClick,
   disabled = false,
-  loading = false,
   children,
   variant,
   size,
@@ -63,20 +60,6 @@ const Button = ({
   className,
   ...props
 }: ButtonProps) => {
-  if (loading) {
-    return (
-      <button
-        className={cn(buttonVariants({ variant, size, shape }), className)}
-        disabled
-        type="button"
-        {...props}
-      >
-        <Spin />
-        {size !== "icon" && children}
-      </button>
-    );
-  }
-
   if (href) {
     return (
       <a

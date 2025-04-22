@@ -22,9 +22,6 @@ export default function Index() {
         <Button disabled variant="solid">
           Disabled
         </Button>
-        <Button loading variant="outlined">
-          Loading
-        </Button>
       </div>
       <div className="flex flex-row flex-wrap gap-4">
         <Button
@@ -54,9 +51,6 @@ export default function Index() {
           href="https://tailwindcss.com/docs/installation/using-vite"
           target="_blank"
         >
-          <SearchOutlined />
-        </Button>
-        <Button shape="square" size="icon" loading variant="outlined">
           <SearchOutlined />
         </Button>
       </div>

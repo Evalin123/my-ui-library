@@ -218,37 +218,6 @@ const SearchOutlined = (props) => /* @__PURE__ */ jsx(
     )
   }
 );
-const Spin = (props) => /* @__PURE__ */ jsxs(
-  "svg",
-  {
-    className: "size-5 animate-spin text-white",
-    xmlns: "http://www.w3.org/2000/svg",
-    fill: "none",
-    viewBox: "0 0 24 24",
-    ...props,
-    children: [
-      /* @__PURE__ */ jsx(
-        "circle",
-        {
-          className: "opacity-25",
-          cx: "12",
-          cy: "12",
-          r: "10",
-          stroke: "black",
-          strokeWidth: "4"
-        }
-      ),
-      /* @__PURE__ */ jsx(
-        "path",
-        {
-          className: "opacity-75",
-          fill: "black",
-          d: "M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
-        }
-      )
-    ]
-  }
-);
 function RadioDemo() {
   const [selectedValue, setSelectedValue] = useState(1);
   return /* @__PURE__ */ jsx("div", { children: /* @__PURE__ */ jsx("div", { className: "p-8 flex gap-4", children: /* @__PURE__ */ jsx(
@@ -312,7 +281,6 @@ const Button = ({
   target,
   onClick,
   disabled = false,
-  loading = false,
   children,
   variant,
   size,
@@ -320,21 +288,6 @@ const Button = ({
   className,
   ...props
 }) => {
-  if (loading) {
-    return /* @__PURE__ */ jsxs(
-      "button",
-      {
-        className: cn(buttonVariants({ variant, size, shape }), className),
-        disabled: true,
-        type: "button",
-        ...props,
-        children: [
-          /* @__PURE__ */ jsx(Spin, {}),
-          size !== "icon" && children
-        ]
-      }
-    );
-  }
   if (href) {
     return /* @__PURE__ */ jsx(
       "a",
@@ -378,8 +331,7 @@ function Index() {
           ]
         }
       ),
-      /* @__PURE__ */ jsx(Button, { disabled: true, variant: "solid", children: "Disabled" }),
-      /* @__PURE__ */ jsx(Button, { loading: true, variant: "outlined", children: "Loading" })
+      /* @__PURE__ */ jsx(Button, { disabled: true, variant: "solid", children: "Disabled" })
     ] }),
     /* @__PURE__ */ jsxs("div", { className: "flex flex-row flex-wrap gap-4", children: [
       /* @__PURE__ */ jsx(
@@ -406,8 +358,7 @@ function Index() {
           target: "_blank",
           children: /* @__PURE__ */ jsx(SearchOutlined, {})
         }
-      ),
-      /* @__PURE__ */ jsx(Button, { shape: "square", size: "icon", loading: true, variant: "outlined", children: /* @__PURE__ */ jsx(SearchOutlined, {}) })
+      )
     ] }),
     /* @__PURE__ */ jsxs("div", { className: "flex flex-row flex-wrap gap-4", children: [
       /* @__PURE__ */ jsx(Button, { className: "bg-red-600 hover:bg-indigo-700", variant: "solid", children: "Solid" }),
@@ -424,7 +375,7 @@ const route2 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProper
   __proto__: null,
   default: Index
 }, Symbol.toStringTag, { value: "Module" }));
-const serverManifest = { "entry": { "module": "/assets/entry.client-BqFK1pa3.js", "imports": ["/assets/jsx-runtime-CLUdW5VC.js", "/assets/index-C3SifoeI.js", "/assets/components-CP0FHthH.js"], "css": [] }, "routes": { "root": { "id": "root", "parentId": void 0, "path": "", "index": void 0, "caseSensitive": void 0, "hasAction": false, "hasLoader": false, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/root--nPv5Civ.js", "imports": ["/assets/jsx-runtime-CLUdW5VC.js", "/assets/index-C3SifoeI.js", "/assets/components-CP0FHthH.js"], "css": [] }, "routes/radio-demo": { "id": "routes/radio-demo", "parentId": "root", "path": "radio-demo", "index": void 0, "caseSensitive": void 0, "hasAction": false, "hasLoader": false, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/radio-demo-BTOPKfV4.js", "imports": ["/assets/jsx-runtime-CLUdW5VC.js", "/assets/index-C3SifoeI.js", "/assets/searchOutlined-lqpNnImW.js"], "css": [] }, "routes/_index": { "id": "routes/_index", "parentId": "root", "path": void 0, "index": true, "caseSensitive": void 0, "hasAction": false, "hasLoader": false, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/_index-CGY-4xM4.js", "imports": ["/assets/jsx-runtime-CLUdW5VC.js", "/assets/searchOutlined-lqpNnImW.js"], "css": [] } }, "url": "/assets/manifest-ed804d77.js", "version": "ed804d77" };
+const serverManifest = { "entry": { "module": "/assets/entry.client-BqFK1pa3.js", "imports": ["/assets/jsx-runtime-CLUdW5VC.js", "/assets/index-C3SifoeI.js", "/assets/components-CP0FHthH.js"], "css": [] }, "routes": { "root": { "id": "root", "parentId": void 0, "path": "", "index": void 0, "caseSensitive": void 0, "hasAction": false, "hasLoader": false, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/root--nPv5Civ.js", "imports": ["/assets/jsx-runtime-CLUdW5VC.js", "/assets/index-C3SifoeI.js", "/assets/components-CP0FHthH.js"], "css": [] }, "routes/radio-demo": { "id": "routes/radio-demo", "parentId": "root", "path": "radio-demo", "index": void 0, "caseSensitive": void 0, "hasAction": false, "hasLoader": false, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/radio-demo-BTOPKfV4.js", "imports": ["/assets/jsx-runtime-CLUdW5VC.js", "/assets/index-C3SifoeI.js", "/assets/searchOutlined-lqpNnImW.js"], "css": [] }, "routes/_index": { "id": "routes/_index", "parentId": "root", "path": void 0, "index": true, "caseSensitive": void 0, "hasAction": false, "hasLoader": false, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/_index-BnMJMAtu.js", "imports": ["/assets/jsx-runtime-CLUdW5VC.js", "/assets/searchOutlined-lqpNnImW.js"], "css": [] } }, "url": "/assets/manifest-5f200912.js", "version": "5f200912" };
 const mode = "production";
 const assetsBuildDirectory = "build/client";
 const basename = "/";
