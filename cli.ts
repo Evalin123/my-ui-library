@@ -23,6 +23,7 @@ const __dirname = path.dirname(__filename);
 const require = createRequire(import.meta.url); // create a require function that works with ES modules
 
 const program = new Command();
+const filesCreated: string[] = [];
 
 program.name("my-ui").description("Add a UI component to your project");
 
@@ -99,7 +100,16 @@ program
       return process.exit(0);
     }
 
-    const templatesDir = path.resolve(__dirname, "../app/templates");
+    const sourceUtilsPath = path.resolve(__dirname, "./app/utils/cn.ts");
+    const targetUtilsPath = path.resolve(process.cwd(), "lib/utils/cn.ts");
+
+    if (!fs.existsSync(targetUtilsPath)) {
+      filesCreated.push(targetUtilsPath);
+      fs.mkdirSync(path.dirname(targetUtilsPath), { recursive: true });
+      fs.copyFileSync(sourceUtilsPath, targetUtilsPath);
+    }
+
+    const templatesDir = path.resolve(__dirname, "./app/templates");
 
     const hasAppDir = fs.existsSync(path.resolve(process.cwd(), "app"));
     const targetDir = hasAppDir
@@ -117,9 +127,14 @@ program
 
     log.info(`Installing ${comp}...`);
 
+    filesCreated.push(targetDir);
     fs.mkdirSync(targetDir, { recursive: true });
     fs.copyFileSync(sourcePath, targetPath);
-    outro(`${color.green("Success!")} Installed ${comp} component.`);
+    outro(
+      `${color.green("Success!")} Created ${filesCreated.length} ${
+        filesCreated.length === 1 ? "file" : "files"
+      }:`
+    );
   });
 
 program.parse();
